@@ -92,7 +92,7 @@ nav{
   font-family:var(--sans);font-size:0.7rem;
   letter-spacing:0.22em;text-transform:uppercase;
   text-decoration:none;border:none;cursor:pointer;
-  font-weight:500;width:fit-content;
+  font-weight:500;width:fit-content;max-width:280px;
   transition:opacity 0.25s;
 }
 .btn-hero:hover{opacity:0.85}
@@ -456,17 +456,27 @@ footer{
   .hero{grid-template-columns:1fr;height:100vh;margin-top:-72px;}
   .hero::after{display:none}
   .hero-left{
-    padding:calc(72px + 2rem) 2rem 2rem;
+    padding:calc(72px + 1.5rem) 1.5rem 2.5rem;
     justify-content:flex-end;
     position:relative;z-index:2;
     background:linear-gradient(to top, rgba(12,12,12,0.92) 60%, rgba(12,12,12,0.3) 100%);
   }
+  .btn-hero{
+    padding:0.85rem 1.8rem;
+    font-size:0.65rem;
+    width:auto;max-width:220px;
+  }
   .hero-right{
     position:absolute!important;
-    inset:0;height:100%!important;
+    top:0;left:0;right:0;bottom:0;
+    width:100%;height:100%!important;
     z-index:1;
   }
-  .hero-right img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+  .hero-right img{
+    width:100%;height:100%;
+    object-fit:cover;object-position:center top;
+    position:absolute;top:0;left:0;
+  }
   .hero-phrase{font-size:0.85rem;bottom:1.5rem;left:1.5rem;right:1.5rem;z-index:3;}
 
   /* Countdown */
@@ -641,7 +651,6 @@ document.head.appendChild(tag);
   </div>
   <div class="hero-right">
     <img src="assets/img/hero.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
-    <p class="hero-phrase">"Sejam bem-vindos ao início<br>da nossa história"</p>
   </div>
 </section>
 
@@ -813,7 +822,7 @@ document.head.appendChild(tag);
       <div class="gift-card">
         <p class="gift-num">02 —</p>
         <span class="gift-icon">💻</span>
-        <p class="gift-name">Lista Magalu</p>
+        <p class="gift-name">Lista Online</p>
         <p class="gift-desc">Presenteie com praticidade pela plataforma Final Feliz, com entrega direta para nós.</p>
         <a href="https://www.finalfeliz.de/gabriela-de-morais-rocha--guilherme-melo-da-costa" target="_blank" class="btn-gift">Acessar Final Feliz →</a>
       </div>
