@@ -58,17 +58,14 @@ nav{
 
 /* ── HERO ── */
 .hero{
-  min-height:100vh;
+  height:100vh;
   display:grid;grid-template-columns:1fr 1fr;
-  padding-top:72px;position:relative;overflow:hidden;
-}
-.hero::after{
-  content:'';position:absolute;top:0;bottom:0;left:50%;
-  width:1px;background:var(--line);
+  position:relative;overflow:hidden;
+  margin-top:-72px;
 }
 .hero-left{
   display:flex;flex-direction:column;justify-content:flex-end;
-  padding:5rem 4rem 5rem 5rem;position:relative;
+  padding:5rem 4rem 5rem 5rem;padding-top:calc(72px + 3rem);position:relative;
 }
 .hero-tag{
   font-size:0.62rem;letter-spacing:0.35em;text-transform:uppercase;
@@ -102,12 +99,15 @@ nav{
 
 .hero-right{
   position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
+  min-height:calc(100vh - 72px);
 }
 .hero-right img{
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
   width:100%;height:100%;
   object-fit:cover;object-position:center top;
-  display:block;position:absolute;inset:0;
+  display:block;
+  will-change:transform;
 }
 .hero-img-area{
   width:100%;height:100%;
@@ -214,7 +214,7 @@ section{padding:8rem 0}
   display:block;transition:transform 0.5s ease;
 }
 .story-photo:hover img{transform:scale(1.03)}
-.story-photo:nth-child(2){height:200px;margin-left:3rem}
+.story-photo:nth-child(2){height:320px;margin-left:3rem}
 .story-text{padding-top:1rem}
 .story-quote{
   font-family:var(--serif);font-size:1.6rem;font-style:italic;
@@ -229,7 +229,7 @@ section{padding:8rem 0}
 .gallery-grid{
   display:grid;
   grid-template-columns:repeat(12,1fr);
-  grid-auto-rows:180px;
+  grid-template-rows:200px 200px 380px;
   gap:8px;margin-top:4rem;
 }
 .g-item{
@@ -453,11 +453,21 @@ footer{
   .hamburger{display:flex}
 
   /* Hero */
-  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero{grid-template-columns:1fr;height:100vh;margin-top:-72px;}
   .hero::after{display:none}
-  .hero-left{padding:3.5rem 2rem 3rem;justify-content:center}
-  .hero-right{height:55vw;min-height:260px}
-  .hero-phrase{font-size:0.9rem;bottom:1.5rem;left:1.5rem;right:1.5rem}
+  .hero-left{
+    padding:calc(72px + 2rem) 2rem 2rem;
+    justify-content:flex-end;
+    position:relative;z-index:2;
+    background:linear-gradient(to top, rgba(12,12,12,0.92) 60%, rgba(12,12,12,0.3) 100%);
+  }
+  .hero-right{
+    position:absolute!important;
+    inset:0;height:100%!important;
+    z-index:1;
+  }
+  .hero-right img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+  .hero-phrase{font-size:0.85rem;bottom:1.5rem;left:1.5rem;right:1.5rem;z-index:3;}
 
   /* Countdown */
   .countdown{flex-wrap:wrap}
@@ -630,7 +640,7 @@ document.head.appendChild(tag);
     <a href="#rsvp" class="btn-hero">Confirmar Presença</a>
   </div>
   <div class="hero-right">
-    <img src="assets/img/hero.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+    <img src="assets/img/hero.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
     <p class="hero-phrase">"Sejam bem-vindos ao início<br>da nossa história"</p>
   </div>
 </section>
@@ -702,10 +712,10 @@ document.head.appendChild(tag);
     <div class="story-inner">
       <div class="story-photos reveal">
         <div class="story-photo" style="background:none;padding:0;overflow:hidden">
-          <img src="assets/img/story-1.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="assets/img/story-1.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div class="story-photo" style="background:none;padding:0;overflow:hidden;margin-left:3rem">
-          <img src="assets/img/story-2.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="assets/img/story-2.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;">
         </div>
       </div>
       <div class="story-text reveal">
@@ -729,14 +739,14 @@ document.head.appendChild(tag);
     <p class="s-label">Memórias</p>
     <h2 class="s-title">Nossa <em>Galeria</em></h2>
     <div class="gallery-grid">
-      <div class="g-item"><img src="assets/img/gal-1.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
-      <div class="g-item"><img src="assets/img/gal-2.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
-      <div class="g-item"><img src="assets/img/gal-3.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
-      <div class="g-item"><img src="assets/img/gal-4.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
-      <div class="g-item"><img src="assets/img/gal-5.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
-      <div class="g-item"><img src="assets/img/gal-6.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
-      <div class="g-item"><img src="assets/img/gal-7.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
-      <div class="g-item"><img src="assets/img/gal-8.jpg.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
+      <div class="g-item"><img src="assets/img/gal-1.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
+      <div class="g-item"><img src="assets/img/gal-2.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
+      <div class="g-item"><img src="assets/img/gal-3.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
+      <div class="g-item"><img src="assets/img/gal-4.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
+      <div class="g-item"><img src="assets/img/gal-5.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
+      <div class="g-item"><img src="assets/img/gal-6.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
+      <div class="g-item"><img src="assets/img/gal-7.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
+      <div class="g-item"><img src="assets/img/gal-8.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
     </div>
   </div>
 </section>
@@ -803,7 +813,7 @@ document.head.appendChild(tag);
       <div class="gift-card">
         <p class="gift-num">02 —</p>
         <span class="gift-icon">💻</span>
-        <p class="gift-name">Lista Online</p>
+        <p class="gift-name">Lista Magalu</p>
         <p class="gift-desc">Presenteie com praticidade pela plataforma Final Feliz, com entrega direta para nós.</p>
         <a href="https://www.finalfeliz.de/gabriela-de-morais-rocha--guilherme-melo-da-costa" target="_blank" class="btn-gift">Acessar Final Feliz →</a>
       </div>
@@ -925,6 +935,18 @@ const observer = new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:0.12});
 revealEls.forEach(el=>observer.observe(el));
+
+// ── PARALLAX ──
+const heroImg = document.querySelector('.hero-right img');
+function applyParallax(){
+  if(!heroImg) return;
+  const scrollY = window.scrollY;
+  const heroHeight = document.querySelector('.hero').offsetHeight;
+  if(scrollY <= heroHeight + 200){
+    heroImg.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
+  }
+}
+window.addEventListener('scroll', applyParallax, {passive:true});
 
 // ── MOBILE MENU ──
 const hamburger = document.getElementById('hamburger');
