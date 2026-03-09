@@ -597,8 +597,8 @@ var ytPlayer;
 var ytReady = false;
 function onYouTubeIframeAPIReady(){
   ytPlayer = new YT.Player('yt-player',{
-    videoId:'rS5M-GhHRR4', // "Tudo" - Nando Reis (romantic wedding classic)
-    playerVars:{autoplay:0,loop:1,playlist:'rS5M-GhHRR4',controls:0,disablekb:1,modestbranding:1},
+    videoId:'wb22hYplsIk', // Antes de Você - José Júnior
+    playerVars:{autoplay:0,loop:1,playlist:'wb22hYplsIk',controls:0,disablekb:1,modestbranding:1},
     events:{
       onReady:function(){ytReady=true;},
     }
@@ -651,6 +651,7 @@ document.head.appendChild(tag);
   </div>
   <div class="hero-right">
     <img src="assets/img/hero.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+    <p class="hero-phrase">"Sejam bem-vindos ao início<br>da nossa história"</p>
   </div>
 </section>
 
@@ -707,7 +708,7 @@ document.head.appendChild(tag);
           <span class="dressinfo-icon">🎩</span>
           <div class="dressinfo-text">
             <strong>Dress Code</strong>
-            Traje social / Por gentileza evite usar as cores preto e branco.
+            Traje social / A combinar — evite branco e tons claros.
           </div>
         </div>
       </div>
@@ -731,7 +732,7 @@ document.head.appendChild(tag);
         <p class="s-label">Nossa História</p>
         <h2 class="s-title"><em>Uma história</em><br>que vale contar</h2>
         <blockquote class="story-quote">
-          "E disse Deus: Por essa razão, o homem deixará pai e mãe e se unirá a sua mulher, e os dois se tornarão uma só carne. Assim, eles já não são dois, mas sim uma só carne. Portanto, ninguém separe o que Deus uniu". Mateus 19:5-6
+          "Estamos vivendo um sonho e queremos dividir cada detalhe com quem faz parte da nossa história."
         </blockquote>
         <p class="story-body">
           Sua presença é muito importante para nós nesse dia tão especial.<br><br>
@@ -755,7 +756,7 @@ document.head.appendChild(tag);
       <div class="g-item"><img src="assets/img/gal-5.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
       <div class="g-item"><img src="assets/img/gal-6.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
       <div class="g-item"><img src="assets/img/gal-7.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
-      <div class="g-item"><img src="assets/img/gal-8-.jpg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
+      <div class="g-item"><img src="assets/img/gal-8.jpeg" alt="Gabriela e Guilherme" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;transition:transform 0.4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"></div>
     </div>
   </div>
 </section>
@@ -771,7 +772,7 @@ document.head.appendChild(tag);
           Confirme sua presença para que possamos preparar tudo com o carinho que você merece.
         </p>
         <div class="rsvp-deadline">
-          Confirme até: <span>23 de Maio de 2026</span>
+          Confirme até: <span>01 de Junho de 2026</span>
         </div>
       </div>
       <div class="reveal">
@@ -822,7 +823,7 @@ document.head.appendChild(tag);
       <div class="gift-card">
         <p class="gift-num">02 —</p>
         <span class="gift-icon">💻</span>
-        <p class="gift-name">Lista Magalu</p>
+        <p class="gift-name">Lista Online</p>
         <p class="gift-desc">Presenteie com praticidade pela plataforma Final Feliz, com entrega direta para nós.</p>
         <a href="https://www.finalfeliz.de/gabriela-de-morais-rocha--guilherme-melo-da-costa" target="_blank" class="btn-gift">Acessar Final Feliz →</a>
       </div>
@@ -853,8 +854,8 @@ document.head.appendChild(tag);
   <div class="music-info">
     <span class="music-icon">🎵</span>
     <div class="music-playing">
-      <strong>Tudo</strong>
-      Nando Reis
+      <strong>Antes de Você</strong>
+      José Júnior
     </div>
   </div>
   <button class="music-toggle" id="music-toggle" onclick="toggleMusic()">Pausar</button>
@@ -919,8 +920,13 @@ const musicToggle = document.getElementById('music-toggle');
 function showMusicBar(){
   if(!musicStarted){
     musicBar.classList.add('visible');
-    if(ytReady) ytPlayer.playVideo();
     musicStarted = true;
+  }
+}
+function tryPlay(){
+  if(ytReady){
+    ytPlayer.playVideo();
+    musicToggle.textContent='Pausar';
   }
 }
 function toggleMusic(){
@@ -936,7 +942,17 @@ function toggleMusic(){
     document.querySelector('.music-icon').style.animationPlayState='running';
   }
 }
+// Mostra barra ao rolar
 window.addEventListener('scroll',()=>{if(window.scrollY>200)showMusicBar();},{once:true});
+// Toca ao primeiro clique/toque do usuário
+document.addEventListener('click', function startOnInteraction(){
+  tryPlay();
+  document.removeEventListener('click', startOnInteraction);
+}, {once:true});
+document.addEventListener('touchstart', function startOnTouch(){
+  tryPlay();
+  document.removeEventListener('touchstart', startOnTouch);
+}, {once:true});
 
 // ── FADE-IN ON SCROLL ──
 const revealEls = document.querySelectorAll('.reveal');
